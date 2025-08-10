@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Selection</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f5f2;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 50px;
+        }
+        .card {
+            background-color: navy;
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        .home-btn {
+            background-color: orange;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .home-btn:hover {
+            background-color: darkorange;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: #1e3a8a; font-size: 28px;"><b>🔵 ELECTRINOVA</b></h1>
+    <div class="container">
+        <img src="c3.jpg" alt="Students talking" width="400" style="border-radius: 20px;">
+        <div class="card">
+            <h2>คุณได้เลือกทีม</h2>
+            <h1>"RC Alliance"</h1>
+            <button class="home-btn" onclick="goHome()">HOME</button>
+        </div>
+    </div>
+
+    <script>
+        function goHome() {
+            window.location.href = 'http://sukiskipiti.test/index.php';
+        }
+    </script>
+</body>
+</html>

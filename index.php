@@ -1,468 +1,516 @@
 <?php
 
     session_start();
-    include('server.php');
+   
     $data_user_group = isset($_SESSION['group']) ? $_SESSION['group'] : null;
     $data_user_username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
     $data_user_id=isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 ?> 
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="description" content="">
-        <meta name="author" content="">
+<!DOCTYPE html>
+<html lang="th">
 
-        <title>ELECTRINOVA</title>
+<head>
+    <meta charset="utf-8">
+    <title>vote</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        <!-- CSS FILES -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
 
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
-
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap-icons.css" rel="stylesheet">
-
-        <link rel="stylesheet" href="css/slick.css"/>
-
-        <link href="css/tooplate-little-fashion.css" rel="stylesheet">
-<!--
-
-Tooplate 2127 Little Fashion
-
-https://www.tooplate.com/view/2127-little-fashion
-
--->
-    </head>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
     
-    <body>
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-        <section class="preloader">
-            <div class="spinner">
-                <span class="sk-inner-circle"></span>
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    
+</head>
+<style>
+    :root {
+    --primary: #FE5D37;
+    --light: #FFF5F3;
+    --dark: #103741;
+}
+
+.back-to-top {
+    position: fixed;
+    display: none;
+    right: 45px;
+    bottom: 45px;
+    z-index: 99;
+}
+
+
+/*** Spinner ***/
+#spinner {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    z-index: 99999;
+}
+
+#spinner.show {
+    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/*** Button ***/
+.btn {
+    font-weight: 500;
+    transition: .5s;
+}
+
+.btn.btn-primary {
+    color: #FFFFFF;
+}
+
+.btn-square {
+    width: 38px;
+    height: 38px;
+}
+
+.btn-sm-square {
+    width: 32px;
+    height: 32px;
+}
+
+.btn-lg-square {
+    width: 48px;
+    height: 48px;
+}
+
+.btn-square,
+.btn-sm-square,
+.btn-lg-square {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal;
+    border-radius: 50px;
+}
+
+
+/*** Heading ***/
+h1,
+h2,
+h3,
+h4,
+.h1,
+.h2,
+.h3,
+.h4,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
+    font-family: 'Lobster Two', cursive;
+    font-weight: 700;
+}
+
+h5,
+h6,
+.h5,
+.h6 {
+    font-weight: 600;
+}
+
+.font-secondary {
+    font-family: 'Lobster Two', cursive;
+}
+
+
+</style>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
-        </section>
-    
-        <main>
-
-            <nav class="navbar navbar-expand-lg">
-                <div class="container">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <a class="navbar-brand" href="index.php">
-                        <strong><span>ELECTRI</span>NOVA</strong>
-                    </a>
-
-                    <div class="d-lg-none">
-                        <a href="sign-in.php" class="bi-person custom-icon me-3"></a>
-
-                        <a href="product-detail.php" class="bi-bag custom-icon"></a>
-                    </div>
-
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mx-auto">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="index.php">หน้าหลัก</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="about.php">พรรค</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="products.php">ข่าวสาร</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="faq.php">FAQs</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.php">ติดต่อ</a>
-                            </li>
-                        </ul>
-                        
-
-                        <div class="d-none d-lg-block">
-                            <?php
-                                if(isset($data_user_id) || $data_user_id!=""){ ?>
-
-                                <a href="sign-index.php" class="bi-person custom-icon me-3"><?php echo $data_user_username; ?></a>
-
-                            <?php }else{ ?>
-
-                                <a href="sign-in.php" class="bi-person custom-icon me-3"></a>sign in <?php echo $data_user_id;?>
-
-                            <?php } ?>                            
-                           
-        
-                        </div>
-
-                    </div>
-                </div>
-            </nav>
-
-            <section class="slick-slideshow">   
-                <div class="slick-custom">
-                    <img src="images/slideshow/medium-shot-business-women-high-five.jpeg" class="img-fluid" alt="">
-
-                    <div class="slick-bottom">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 col-10">
-                                    <h1 class="slick-title">เลือกตั้ง</h1>
-
-                                    <p class="lead text-white mt-lg-3 mb-lg-5">ถึงเวลาใช้สิทธิของคุณ เพื่อช่วยเป็นกระบอกเสียงในการพัดนาโรงเรียนของพวกเรา</p>
-
-                                    <a href="/vote/index.php" class="btn custom-btn">ไปเลือกกัน!</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="slick-custom">
-                    <img src="images/slideshow/team-meeting-renewable-energy-project.jpeg" class="img-fluid" alt="">
-
-                    <div class="slick-bottom">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 col-10">
-                                    <h1 class="slick-title">พรรคต่างๆ</h1>
-
-                                    <p class="lead text-white mt-lg-3 mb-lg-5">ชมข้อมูลพรรคต่างๆ พร้อมนโยบายที่หน้าสนใจในปีนี้</p>
-
-                                    <a href="products.php" class="btn custom-btn">ไปสำรวจกัน</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="slick-custom">
-                    <img src="images/slideshow/two-business-partners-working-together-office-computer.jpeg" class="img-fluid" alt="">
-
-                    <div class="slick-bottom">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 col-10">
-                                    <h1 class="slick-title">ข่าวสาร</h1>
-
-                                    <p class="lead text-white mt-lg-3 mb-lg-5">รับรู้ข่าวสารที่อัพเดตอยู่ตลอดเวลา ไม่ต้องกลัวตกข่าว!!</p>
-
-                                    <a href="products.php" class="btn custom-btn">ข่าวสารเพิ่มเติม</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-
-            <section class="about section-padding">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-12 text-center">
-                            <h2 class="mb-5">มาดู<span>พรรค</span>ทั้งหมดในปีนี้กัน</h2>
-                        </div>
-
-                        <div class="col-lg-2 col-12 mt-auto mb-auto">
-                            <ul class="nav nav-pills mb-5 mx-auto justify-content-center align-items-center" id="pills-tab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">RC Chargers</button>
-                                </li>
-
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-youtube-tab" data-bs-toggle="pill" data-bs-target="#pills-youtube" type="button" role="tab" aria-controls="pills-youtube" aria-selected="true">RC Guardians</button>
-                                </li>
-
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-skill-tab" data-bs-toggle="pill" data-bs-target="#pills-skill" type="button" role="tab" aria-controls="pills-skill" aria-selected="false">RC Alliance</button>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="col-lg-10 col-12">
-                            <div class="tab-content mt-2" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-
-                                    <div class="row">
-                                        <div class="col-lg-7 col-12">
-                                            <img src="https://i.pinimg.com/736x/75/fd/ca/75fdcaf18f507cad152b255d867ec376.jpg" class="img-fluid" alt="">
-                                        </div>
-
-                                        <div class="col-lg-5 col-12">
-                                            <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
-                                                <h4 class="mb-3">R<span>C</span> <br>RC Char<span>ger</span>s</h4>
-
-                                                <p>พลังขับเคลื่อนที่ไม่มีวันหยุด! พรรค RC Chargers จะเป็นเหมือนพลังงานที่ขับเคลื่อนโรงเรียนให้ก้าวไปข้างหน้า เราจะนำพาความคิดสร้างสรรค์และความกระตือรือร้นมาพัฒนาโรงเรียนของเราให้ดียิ่งขึ้น</p>
-
-
-                                                <div class="mt-2 mt-lg-auto">
-                                                    <a href="about.php" class="custom-link mb-2">
-                                                        รู้จักกันมากขึ้น
-                                                        <i class="bi-arrow-right ms-2"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tab-pane fade" id="pills-youtube" role="tabpanel" aria-labelledby="pills-youtube-tab">
-
-                                    <div class="row">
-                                        <div class="col-lg-7 col-12">
-                                            <div class="ratio ratio-16x9">
-                                            <img src="https://i.pinimg.com/736x/30/9c/75/309c75c9e0b4164e899cb576008c5fb7.jpg" class="img-fluid" alt="">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-5 col-12">
-                                            <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
-                                                <h4 class="mb-3">RC Guardians</h4>
-
-                                                <p>ผู้พิทักษ์โรงเรียนของเรา!</p>
-
-                                                <p>พรรค RC Guardians จะเป็นเหมือนผู้ปกป้องโรงเรียนของเรา เราจะดูแลรักษาสิ่งแวดล้อม รักษาความสะอาด และสร้างบรรยากาศที่ดีในโรงเรียน</p>
-
-                                                <div class="mt-2 mt-lg-auto">
-                                                    <a href="contact.php" class="custom-link mb-2">
-                                                        รู้จักกันมากขึ้น
-                                                        <i class="bi-arrow-right ms-2"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tab-pane fade" id="pills-skill" role="tabpanel" aria-labelledby="pills-skill-tab">
-                                    <div class="row">
-                                        <div class="col-lg-7 col-12">
-                                            <img src="https://i.pinimg.com/736x/e7/bf/e7/e7bfe7a1be27a5f2314d925f71ccbbd5.jpg" class="img-fluid" alt="">
-                                        </div>
-
-                                        <div class="col-lg-5 col-12">
-                                            <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
-                                                <h4 class="mb-3">RC Alliance</h4>
-
-                                                <p>รวมพลังเพื่ออนาคต!</p> 
-
-                                                <p>พรรค RC Alliance เชื่อในพลังของความร่วมมือ เราจะรวมพลังของนักเรียนทุกคนเพื่อสร้างสรรค์กิจกรรมต่างๆ และพัฒนาโรงเรียนไปด้วยกัน</p>
-
-                                               <!--<div class="skill-thumb mt-3">
-
-                                                    <strong>Branding</strong>
-                                                        <span class="float-end">90%</span>
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
-                                                            </div>
-
-                                                    <strong>Design & Stragety</strong>
-                                                        <span class="float-end">70%</span>
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
-                                                            </div>
-
-                                                    <strong>Online Platform</strong>
-                                                        <span class="float-end">80%</span>
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
-                                                            </div>
-
-                                                </div>-->
-                                                
-                                                <div class="mt-2 mt-lg-auto">
-                                                    <a href="products.php" class="custom-link mb-2">
-                                                        รู้จักกันมากขึ้น
-                                                        <i class="bi-arrow-right ms-2"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            <section class="front-product">
-                <div class="container-fluid p-0">
-                    <div class="row align-items-center">
-
-                        <div class="col-lg-6 col-12">
-                            <img src="pexels-moose-photos-170195-1036623.jpg" class="img-fluid" alt="">
-                        </div>
-
-                        <div class="col-lg-6 col-12">
-                            <div class="px-5 py-5 py-lg-0">
-                                
-                                <h2 class="mb-4"><span>ปีสุดท้าย</span>ก่อนจากกัน</h2>
-                                <p class="lead mb-4">ขอขอบคุณสำหรับความไว้วางใจของทุกคนที่ทำให้พวกเราได้ทำหน้าที่เพื่อโรงเรียนของพวกเรา ปีนี้จะเป็นปีสุดท้ายที่เราได้เป็นหัวหน้าในการดูและโรงเรียนพวกเราจะทำให้เต็มที่ค่ะ</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            <section class="featured-product section-padding">
-                <div class="container">
-                    <div class="row">
-                        
-                        <div class="col-12 text-center">
-                            <h2 class="mb-5">ข่าวสาร</h2>
-                        </div>
-
-                        <div class="col-lg-4 col-12 mb-3">
-                            <div class="product-thumb">
-                                <a href="product-detail.php">
-                                    <img src="9705_0.jpg" class="img-fluid product-image" alt="">
-                                </a>
-
-                                <div class="product-top d-flex">
-                                    <span class="product-alert me-auto">มาใหม่</span>
-                                </div>
-
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="product-detail.php" class="product-title-link">อัพเดตความนิยมประจำสัปดาห์</a>
-                                        </h5>
-
-                                        <p class="product-p">เช็กความนิยมของแต่ละพรรค</p>
-                                    </div>
-
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">&#128150;</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-12 mb-3">
-                            <div class="product-thumb">
-                                <a href="product-detail.php">
-                                    <img src="9703_0.jpg" class="img-fluid product-image" alt="">
-                                </a>
-
-                                <div class="product-top d-flex">
-                                    <span class="product-alert">แนะนำ</span>
-                                </div>
-
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="product-detail.phpphp" class="product-title-link">บรรยากาศการหาเสียงสภา</a>
-                                        </h5>
-
-                                        <p class="product-p">มาดูบรรยากาศการหาเสียงสภาประจำปี</p>
-                                    </div>
-
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">&#128150;</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-12">
-                            <div class="product-thumb">
-                                <a href="product-detail.php">
-                                    <img src="9704_0.jpg" class="img-fluid product-image" alt="">
-                                </a>
-
-                                <div class="product-top d-flex">
-                                </div>
-
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="product-detail.php" class="product-title-link">สำรวจนโยบายเด่นแต่ละพรรค</a>
-                                        </h5>
-
-                                        <p class="product-p">แต่ละพรรคจะมีนโยบายเด่นอะไรกันบ้างไปดูกัน</p>
-                                    </div>
-
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">&#128150;</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 text-center">
-                            <a href="products.php" class="view-all">ดูข่าวสารทั้งหมด</a>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-        </main>
-
-        <footer class="site-footer">
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Call To Action Start -->
+        <div class="container-xxl py-5">
             <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-3 col-10 me-auto mb-4">
-                        <h4 class="text-white mb-3"><a href="index.php">ELECTRI</a>NOVA</h4>
-                        <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2025 <strong>ELECTRINOVA</strong></p>
-                        <br>
-                        <p class="copyright-text">Designed by <a href="#" target="_blank">SUKISKIPITI</a></p>
+                <div class="bg-light rounded">
+                    <div class="row g-0">
+                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s" style="min-height: 400px;">
+                            <div class="position-relative h-100">
+                                <img class="position-absolute w-100 h-100 rounded" src="vote1.jpg" style="object-fit: cover;">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                            <div class="h-100 d-flex flex-column justify-content-center p-5">
+                                <h1 class="mb-4">เลือกตั้งสำคัญยังไง?</h1>
+                                <p class="mb-4"> กระบวนการที่เปิดโอกาสให้ประชาชนมีส่วนร่วมในการปกครอง เลือกผู้นำที่เหมาะสม มาทำหน้าที่แทนตนเอง กำหนดทิศทางอนาคตของประเทศหรือองค์กร และ ส่งเสริมประชาธิปไตย ถ้าอยากได้ผู้นำที่ดีและนโยบายที่ตรงใจ ต้องออกไปใช้สิทธิ์เลือกตั้ง
+                                </p>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="col-lg-5 col-8">
-                        <h5 class="text-white mb-3">Sitemap</h5>
-
-                        <ul class="footer-menu d-flex flex-wrap">
-                            <li class="footer-menu-item"><a href="about.php" class="footer-menu-link">Story</a></li>
-
-                            <li class="footer-menu-item"><a href="products.php" class="footer-menu-link">ข่าวสาร</a></li>
-
-                            <li class="footer-menu-item"><a href="index.php" class="footer-menu-link">หน้าหลัก</a></li>
-
-                            <li class="footer-menu-item"><a href="faq.php" class="footer-menu-link">FAQs</a></li>
-
-                            <li class="footer-menu-item"><a href="contact.php" class="footer-menu-link">ติดต่อ</a></li>
-                        </ul>
-                    </div>
-                    
-
-                    <div class="col-lg-3 col-4">
-                        <h5 class="text-white mb-3">Social</h5>
-
-                        <ul class="social-icon">
-
-                            <li><a href="https://www.youtube.com/@coelischool" class="social-icon-link bi-youtube"></a></li>
-
-                            <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
-
-                            <li><a href="https://www.facebook.com/profile.php?id=100063614137880#" class="social-icon-link bi-instagram"></a></li>
-
-                            <li><a href="https://www.regina.ac.th/index.php/th-th/" class="social-icon-link bi-skype"></a></li>
-                        </ul>
-                    </div>
-
                 </div>
             </div>
-        </footer>
+        </div>
+        <!-- Call To Action End -->
 
-        <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/Headroom.js"></script>
-        <script src="js/jQuery.headroom.js"></script>
-        <script src="js/slick.min.js"></script>
-        <script src="js/custom.js"></script>
 
-    </body>
+        <!-- Classes Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3"><?php echo $data_user_username;?></h1>
+                    <h1 class="mb-3">เลือกพรรคที่ชื่นชอบ</h1>
+                    <p>เลือกพรรคที่ใช่พรรคที่ชอบ ที่คุณต้องการเลือกเข้ามา เพื่อสร้างความเปลี่ยนแปลงให้แก่โรงเรียน</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="classes-item">
+                            <div class="bg-light rounded-circle mx-auto p-3" style="width: 150px; height: 150px; display: flex; align-items: center; justify-content: center;">
+                                <img class="img-fluid rounded-circle" src="c1.jpg" alt="">
+                            </div>
+                            <div class="bg-light rounded p-4 pt-5 mt-n5">
+                                <a class="d-block text-center h3 mt-3 mb-4">RC Chargers</a>
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle flex-shrink-0" src="2025001.jpg" alt="" style="width: 45px; height: 45px;">
+                                        <div class="ms-3">
+                                            <h6 class="text-primary mb-1">จารุณี ชัยเลิศ</h6>
+                                            <small>ประธานนักเรียน</small>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="party_idA" id="party_idA" value="2025001">
+                                    <button class="vote-button bg-primary text-white rounded-pill py-2 px-3" name="button_voteA" id="button_voteA">เลือก</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="classes-item">
+                            <div class="bg-light rounded-circle mx-auto p-3" style="width: 150px; height: 150px; display: flex; align-items: center; justify-content: center;">
+                                <img class="img-fluid rounded-circle" src="c2.jpg" alt="">
+                            </div>
+                            <div class="bg-light rounded p-4 pt-5 mt-n5">
+                                <a class="d-block text-center h3 mt-3 mb-4" >RC Guardians</a>
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle flex-shrink-0" src="2025002.jpg" alt="" style="width: 45px; height: 45px;">
+                                        <div class="ms-3">
+                                            <h6 class="text-primary mb-1">เบญญาภา แสงอุทัยวัฒนา</h6>
+                                            <small>ประธานนักเรียน</small>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="party_idB" id="party_idB" value="2025002">
+                                    <button class="vote-button bg-primary text-white rounded-pill py-2 px-3" name="button_voteB" id="button_voteB">เลือก</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="classes-item">
+                            <div class="bg-light rounded-circle mx-auto p-3" style="width: 150px; height: 150px; display: flex; align-items: center; justify-content: center;">
+                                <img class="img-fluid rounded-circle" src="c3.jpg" alt="">
+                            </div>
+                            <div class="bg-light rounded p-4 pt-5 mt-n5">
+                                <a class="d-block text-center h3 mt-3 mb-4">RC Alliance</a>
+                                <div class="d-flex align-items-center justify-content-center mb-4">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle flex-shrink-0" src="2025003.jpg" alt="" style="width: 45px; height: 45px;">
+                                        <div class="ms-3">
+                                            <h6 class="text-primary mb-1">ชวัลลักษณ์ ศิริวัฒนธารา</h6>
+                                            <small>ประธานนักเรียน</small>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="party_idC" id="party_idC" value="2025003">
+                                    <button class="vote-button bg-primary text-white rounded-pill py-2 px-3" name="button_voteC" id="button_voteC">เลือก</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        <!-- Classes End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Template Javascript -->
+
+    <script>
+        $(document).ready(function(){
+            $("#button_voteA").on("click",function(){
+                Swal.fire({
+                    title: "Do you want to save the changes?",
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: "Save",
+                }).then((result)=>{
+                    if (result.isConfirmed) {
+
+                        var party_idA=Number($("#party_idA").val());
+                        var party_year=2025;
+                        var uesr_id=<?php echo $data_user_id;?>;
+                        var code_sql="into";  
+
+                        $.post("vote_process.php",{
+                            party_id:party_idA,
+                            party_year:party_year,
+                            uesr_id:uesr_id,
+                            code_sql:code_sql
+                        }).then(function(code_zone){
+                            var code_zone=code_zone.trim();
+
+                            if(code_zone=="success"){
+                                Swal.fire({
+                                    title: "ลงคะแนนสำเร็จ",
+                                    text: "ขอบคุณที่ใช้สิทธิของท่าน",
+                                    icon: "success",
+                                    buttons: false,
+                                    timer: 2000
+                                }).then(()=>{
+                                    location.reload();
+                                });
+                            }else if(code_zone==="danger"){
+                                Swal.fire({
+                                        title: "ลงคะแนนไม่สำเร็จ",
+                                        text: "ขอบคุณที่ใช้สิทธิของท่าน",
+                                        icon: "error"
+                                    });
+                            }else if(code_zone==="danger"){
+                                Swal.fire({
+                                    title: "ลงคะแนนไม่สำเร็จ",
+                                    text: "ท่านอาจจะลงคะแนนแล้ว",
+                                    icon: "error"
+                                });
+                            }else{
+                                Swal.fire({
+                                    title: "ท่านได้ใช้สิทธิของท่านแล้ว",
+                                    text: "ขอบคุณที่ใช้สิทธิของท่าน",
+                                    icon: "error"
+                                });
+                            }
+                        })
+
+                    }else if(result.isDenied){
+
+                    }else{}
+                })
+            })
+        })
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $("#button_voteB").on("click",function(){
+                Swal.fire({
+                    title: "Do you want to save the changes?",
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: "Confirm",
+                }).then((result)=>{
+                    if (result.isConfirmed) {
+
+                        var party_idB=Number($("#party_idB").val());
+                        var party_year=2025;
+                        var uesr_id=<?php echo $data_user_id;?>;
+                        var code_sql="into";  
+
+                        $.post("vote_process.php",{
+                            party_id:party_idB,
+                            party_year:party_year,
+                            uesr_id:uesr_id,
+                            code_sql:code_sql
+                        }).then(function(code_zone){
+                            var code_zone=code_zone.trim();
+
+                            if(code_zone=="success"){
+                                Swal.fire({
+                                    title: "ลงคะแนนสำเร็จ",
+                                    text: "ขอบคุณที่ใช้สิทธิของท่าน",
+                                    icon: "success",
+                                    buttons: false,
+                                    timer: 2000
+                                }).then(()=>{
+                                    location.reload();
+                                });
+                            }else if(code_zone==="danger"){
+                                Swal.fire({
+                                        title: "ลงคะแนนไม่สำเร็จ",
+                                        text: "ขอบคุณที่ใช้สิทธิของท่าน",
+                                        icon: "error"
+                                    });
+                            }else if(code_zone==="danger"){
+                                Swal.fire({
+                                    title: "ลงคะแนนไม่สำเร็จ",
+                                    text: "ท่านได้ลงคะแนนแล้ว",
+                                    icon: "error"
+                                });
+                            }else{
+                                Swal.fire({
+                                    title: "คุณได้ใช้สิทธิไปแล้ว",
+                                    text: "คุณได้เลือกไปแล้ว!",
+                                    icon: "error"
+                                });
+                            }
+                        })
+
+                    }else if(result.isDenied){
+
+                    }else{}
+                })
+            })
+        })
+    </script>
+
+<script>
+        $(document).ready(function(){
+            $("#button_voteC").on("click",function(){
+                Swal.fire({
+                    title: "Do you want to save the changes?",
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: "Save",
+                }).then((result)=>{
+                    if (result.isConfirmed) {
+
+                        var party_idC=Number($("#party_idC").val());
+                        var party_year=2025;
+                        var uesr_id=<?php echo $data_user_id;?>;
+                        var code_sql="into";  
+
+                        $.post("vote_process.php",{
+                            party_id:party_idC,
+                            party_year:party_year,
+                            uesr_id:uesr_id,
+                            code_sql:code_sql
+                        }).then(function(code_zone){
+                            var code_zone=code_zone.trim();
+
+                            if(code_zone=="success"){
+                                Swal.fire({
+                                    title: "ลงคะแนนสำเร็จ",
+                                    text: "ขอบคุณที่ใช้สทธิ์ของท่าน",
+                                    icon: "success",
+                                    buttons: false,
+                                    timer: 2000
+                                }).then(()=>{
+                                    location.reload();
+                                });
+                            }else if(code_zone==="danger"){
+                                Swal.fire({
+                                        title: "ลงคะแนนไม่สำเร็จ",
+                                        text: "ขอบคุณที่ใช้สทธิ์ของท่าน",
+                                        icon: "error"
+                                    });
+                            }else if(code_zone==="danger"){
+                                Swal.fire({
+                                    title: "ลงคะแนนไม่สำเร็จ",
+                                    text: "ท่านอาจจะลงคะแนนแล้ว",
+                                    icon: "error"
+                                });
+                            }else{
+                                Swal.fire({
+                                    title: "พบข้อผิดพลาด",
+                                    text: "ไม่สามารถดำเนินการได้",
+                                    icon: "error"
+                                });
+                            }
+                        })
+
+                    }else if(result.isDenied){
+
+                    }else{}
+                })
+            })
+        })
+    </script>
+
+
+    <script>
+        (function ($) {
+    "use strict";
+
+    // Initiate the wowjs
+    new WOW().init();
+
+
+    // Spinner
+    var spinner = function () {
+        setTimeout(function () {
+            if ($('#spinner').length > 0) {
+                $('#spinner').removeClass('show');
+            }
+        }, 1);
+    };
+    spinner();
+
+    
+})(jQuery);
+
+
+    function submitVote() {
+        let voteButton = document.getElementById("voteButton");
+
+        // เช็คว่าผู้ใช้เคยโหวตไปแล้วหรือยัง
+        if (localStorage.getItem("hasVoted")) {
+            alert("คุณได้ใช้สิทธิ์โหวตไปแล้ว");
+            return;
+        }
+
+        // ป้องกันการกดปุ่มซ้ำ
+        voteButton.disabled = true;
+
+        // ตั้งค่าให้ผู้ใช้โหวตได้ครั้งเดียว
+        localStorage.setItem("hasVoted", "true");
+
+        // แสดงข้อความขอบคุณ
+        alert("ขอบคุณสำหรับเสียงของคุณ");
+
+        // เปลี่ยนหน้าไปยังหน้าที่ต้องการ (เปลี่ยนเป็นหน้าที่ต้องการ)
+        window.location.href = ""; 
+    }
+
+    // ตรวจสอบว่าผู้ใช้โหวตไปแล้วหรือยัง เมื่อโหลดหน้าใหม่
+    window.onload = function() {
+        let voteButton = document.getElementById("voteButton");
+        if (localStorage.getItem("hasVoted")) {
+            voteButton.disabled = true; // ถ้าโหวตไปแล้วให้ปิดปุ่ม
+        }
+    }
+
+    </script>
+
+    <div class="flex space-x-12">
+        <a href="http://sukiskipiti.test/index.php" target="_self" ><button class="bg-blue-500 text-white text-lg px-7 py-4 rounded-full shadow-lg" type="button">
+        GO TO HOME</button></a>
+        </a>
+    </div>
+</body>
+
 </html>
